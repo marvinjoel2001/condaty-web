@@ -1,7 +1,7 @@
 'use client';
 
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { User } from "@/types/auth";
 
 interface AuthStore {
@@ -18,17 +18,23 @@ export const useAuthStore = create<AuthStore>()(
       user: null,
       token: null,
       login: (user, token) => {
-        localStorage.setItem("token", token); // Mantener esto para el interceptor
+        if (!user?.id) {
+          console.error('Usuario inválido:', user);
+          return;
+        }
+        localStorage.setItem("token", token);
         set({ user, token });
       },
       logout: () => {
-        localStorage.removeItem("token"); // Limpiar también el token del localStorage
+        localStorage.removeItem("token");
         set({ user: null, token: null });
       },
       getToken: () => get().token
     }),
     {
       name: 'auth-storage',
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ user: state.user, token: state.token }),
     }
   )
 );
