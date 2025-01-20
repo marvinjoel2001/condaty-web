@@ -1,13 +1,15 @@
 export interface Product {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    category: string;
-    images: string[];
-    condominio: string;
-    sellerId: number;
-  }
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  category: 'servicios' | 'productos';
+  images: string[];
+  condominio: string;
+  sellerId?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
   
   // Para categorías
   export interface Category {
@@ -51,3 +53,19 @@ export interface Product {
     message?: string;
     success: boolean;
   }
+
+export interface ProductFormProps {
+  initialData?: Product;
+  isEditing?: boolean;
+}
+
+// Para el formulario
+export interface ProductFormData {
+  name: string;
+  description: string;
+  price: number;
+  category: "servicios" | "productos";
+  condominio: string;
+  sellerId?: number;
+  images?: string[];
+}
