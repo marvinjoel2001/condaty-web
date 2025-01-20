@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { Product } from "@/types/product";
+
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const response = await fetch(`${API_URL}/products`);
     const products = await response.json();

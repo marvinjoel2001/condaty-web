@@ -1,9 +1,10 @@
 export interface User {
-    id: number;
-    email: string;
-    name: string;
-    condominio: string;
-  }
+  id: number;
+  email: string;
+  name: string;
+  condominio: string;
+  password?: string;
+}
   
   export interface LoginCredentials {
     email: string;

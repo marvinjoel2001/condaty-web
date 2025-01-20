@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { LoginCredentials } from '@/types/auth';
+import { LoginCredentials, User } from '@/types/auth';
 
 export async function POST(request: Request) {
   try {
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const response = await fetch('http://localhost:3001/users');
     const users = await response.json();
     
-    const user = users.find((u: any) => 
+    const user = users.find((u: User) => 
       u.email === body.email && u.password === body.password
     );
 
